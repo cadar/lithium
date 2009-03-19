@@ -1,0 +1,26 @@
+LFEweb strive to bring LFE to the web, using Nitrogen.
+
+Status: At the moment there are only one file (wf.lfe) and this installation guide.
+
+
+
+Installation guide
+------------------
+
+1. Retrive Erlang*, LFE** and Nitrogen***.
+2. Run the following commands:
+
+nitrogen create myproject
+cd ~/myproject 
+git clone git://github.com/cadar/lfeweb.git
+echo include lfeweb/include.mk >> Makefile
+cp lfeweb/web_blog1.lfe ~/myproject/src/pages/
+make
+sh start.sh
+curl http://localhost:8080/web/blog1
+
+
+
+*   http://erlang.org/download.html
+**  http://github.com/rvirding/lfe/tree/master
+*** http://github.com/rklophaus/nitrogen/tree/master
