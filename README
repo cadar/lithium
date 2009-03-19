@@ -1,6 +1,6 @@
 LFEweb strive to bring LFE to the web, using Nitrogen.
 
-Status: At the moment there are only one file (wf.lfe) and this installation guide.
+Status: At the moment there are only one file (wf.lfe) and this installation guide. This project is designed to live inside a Nitrogen project.
 
 
 
@@ -11,13 +11,14 @@ Installation guide
 2. Run the following commands:
 
 nitrogen create myproject
-cd ~/myproject 
+cd myproject 
 git clone git://github.com/cadar/lfeweb.git
+echo >> Makefile # missing new line 
 echo include lfeweb/include.mk >> Makefile
-cp lfeweb/web_blog1.lfe ~/myproject/src/pages/
-make
+cp lfeweb/examples/web_blog1.lfe src/pages/
+make all
 sh start.sh
-curl http://localhost:8080/web/blog1
+curl http://localhost:8000/web/blog1
 
 
 
