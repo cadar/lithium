@@ -1,7 +1,6 @@
 LFEweb strive to bring LFE to the web, using Nitrogen.
 
-Status: At the moment there are only one file (wf.lfe) and this installation guide. This project is designed to live inside a Nitrogen project.
-
+This project is designed to live in the root directory of a Nitrogen project.
 
 
 Installation guide
