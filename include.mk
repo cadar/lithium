@@ -1,13 +1,13 @@
 vpath %.lfe  ./src/pages
 vpath %.beam ./ebin
 
-LSRCS=web_index.lfe web_blog1.lfe
+LSRCS=web_index.lfe web_blog1.lfe web_viewsource.lfe
 
 LOBJS=$(LSRCS:.lfe=.beam)
 LFE_EBIN=${HOME}/lfe/ebin/
 
 ERL_LOAD='code:load_file(lfe_comp).'
-ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File) of {ok,_Module} -> halt(0); error -> halt(0); All ->  io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(0).'
+ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[{outdir,"./ebin"}]) of {ok,_Module} -> halt(0); error -> halt(0); All ->  io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(0).'
 
 .PHONY: all
 
@@ -16,7 +16,6 @@ all: compile $(LOBJS)
 %.beam : %.lfe
 	@echo Recompile: $<
 	@erl -noshell -pa $(LFE_EBIN) -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
-	@mv $@ ebin 
 
 lclean: clean
 	rm -rf compile.err compile.out *.dump 
@@ -33,7 +32,7 @@ LOG=2> compile.err | tee compile.out
 
 check-syntax:
 	@erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra  $(CHK_SOURCES) $(LOG)
-	mv $(FLY_BEAM) ebin/$(BEAM)  $(LOG)
+	mv ebin/$(FLY_BEAM) ebin/$(BEAM)  $(LOG)
 	@screen -p server -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).'
 	echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242
 
