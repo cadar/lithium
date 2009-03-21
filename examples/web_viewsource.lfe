@@ -14,10 +14,10 @@
   ((module-arg)
    (let* ((module (list_to_atom module-arg))
           (compilerinfo (call module 'module_info 'compile))
-          ;; Source not used. Compilerinfo do not have right 
+          ;; Source not used. Compilerinfo do not have right value.
           ;;(source (: proplists get_value 'source compilerinfo))  
           ((tuple 'ok b) (: file read_file 
-                           (++ '"/Users/Mats/myproject/src/pages/" 
+                           (++ '"/home/cadar/myproject/lfeweb/examples/" 
                                (++ module-arg '".lfe")))))
      (list '"<pre>"
            (replacements (binary_to_list b))
