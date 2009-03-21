@@ -1,4 +1,5 @@
 vpath %.lfe  ./src/pages
+vpath %.lfe  ./lfeweb/examples
 vpath %.beam ./ebin
 
 LSRCS=web_index.lfe web_blog1.lfe web_viewsource.lfe
@@ -15,7 +16,8 @@ all: compile $(LOBJS)
 
 %.beam : %.lfe
 	@echo Recompile: $<
-	@erl -noshell -pa $(LFE_EBIN) -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
+	@erl -noshell -pa $(LFE_EBIN) -eval $(ERL_LOAD) -eval $(ERL_COMP) \
+	-extra $< 
 
 lclean: clean
 	rm -rf compile.err compile.out *.dump 
@@ -24,14 +26,14 @@ wipe: clean lclean
 	rm -rf *.beam
 
 
-
 FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
 BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
 MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=)) 
 LOG=2> compile.err | tee compile.out
 
 check-syntax:
-	@erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra  $(CHK_SOURCES) $(LOG)
+	@erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) \ 
+	-extra  $(CHK_SOURCES) $(LOG)
 	mv ebin/$(FLY_BEAM) ebin/$(BEAM)  $(LOG)
 	@screen -p server -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).'
 	echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242
