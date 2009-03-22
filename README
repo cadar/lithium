@@ -12,7 +12,6 @@ Installation guide
 nitrogen create myproject
 cd myproject 
 git clone git://github.com/cadar/lfeweb.git
-echo >> Makefile # missing new line 
 echo include lfeweb/include.mk >> Makefile
 mv lfeweb/examples/web_blog1.lfe src/pages/
 make all
