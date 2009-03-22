@@ -16,6 +16,7 @@ echo include lfeweb/include.mk >> Makefile
 mv lfeweb/examples/web_blog1.lfe src/pages/
 make all
 sh start.sh
+curl http://localhost:8000/web/blog1
 
 
 
