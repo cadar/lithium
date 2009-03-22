@@ -10,12 +10,11 @@
 (defun body () (list 
 		(make-label text '"First LFEweb page.")
 		(make-hr)
-		(make-link url '"viewsource?module=web_index" text '"This page")
+		(make-link url '"blog1" text '"Blog example")
 		(make-br)
-		(make-link url '"viewsource?module=web_blog1" text '"Blog")
-		(make-br)
-		(make-link url '"viewsource?module=web_viewsource" text '"Viewsource")
-		(make-br)))
+		(make-link url '"viewsource?module=web_viewsource" text '"source of viewsource")
+		(make-hr)
+		(make-link url '"viewsource?module=web_index" text '"source")))
 
 (defun event (_) 'ok)
 

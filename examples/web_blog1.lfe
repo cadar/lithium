@@ -5,9 +5,12 @@
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"LFEweb")
+(defun title () '"The greate blog")
 
-(defun body () (make-label text '"First LFEweb page"))
+(defun body () (list 
+		(make-label text '"Second LFEweb page")		
+		(make-hr)
+		(make-link url '"viewsource?module=web_blog1" text '"source")))
 
 (defun event (_) 'ok)
 

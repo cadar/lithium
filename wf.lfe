@@ -8,6 +8,8 @@
 (defrecord p (module 'element_p)                id actions (show_if 'true) (class '"") (style '""))
 (defrecord br (module 'element_br)              id actions (show_if 'true) (class '"") (style '""))
 (defrecord hr (module 'element_hr)              id actions (show_if 'true) (class '"") (style '""))
+(defrecord value (module 'element_value)        id actions (show_if 'true) (class '"") (style '"") (html_encode 'true))
+(defrecord span (module 'element_span)        id actions (show_if 'true) (class '"") (style '"") (html_encode 'true))
 (defrecord script (module 'action_script)       id actions (show_if 'true) (class '"") (style '"") script)
 (defrecord actionbase (module 'undefined) trigger target actions (show_if 'true))
 (defrecord event (module 'action_event)   trigger target actions (show_if 'true) (type 'click) (delay 1) postback delegate)
