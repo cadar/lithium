@@ -2,7 +2,8 @@ vpath %.lfe  ./src/pages
 vpath %.lfe  ./lfeweb/examples
 vpath %.beam ./ebin
 
-LSRCS=web_frontpage.lfe web_blog1.lfe web_viewsource.lfe
+
+LSRCS=web_blog1.lfe web_viewsource.lfe $(AND_FILE)
 
 LOBJS=$(LSRCS:.lfe=.beam)
 LFE_EBIN=${HOME}/lfe/ebin/
