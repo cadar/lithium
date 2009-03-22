@@ -1,4 +1,4 @@
-(define-module web_frontpage
+(define-module web_index
   (export all))
 
 
