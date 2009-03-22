@@ -1,8 +1,12 @@
 (defrecord elementbase (module 'undefined)      id actions (show_if 'true) (class '"") (style '""))
 (defrecord template (module 'element_template)  id actions (show_if 'true) (class '"") (style '"") file (bindings '()))
-(defrecord error (module 'element_error)        id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
+(defrecord h1 (module 'element_h1)                id actions (show_if 'true) (class '"") (style '""))
+(defrecord h2 (module 'element_h2)                id actions (show_if 'true) (class '"") (style '""))
+(defrecord h3 (module 'element_h3)                id actions (show_if 'true) (class '"") (style '""))
+(defrecord h4 (module 'element_h4)                id actions (show_if 'true) (class '"") (style '""))
 (defrecord label (module 'element_label)        id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 (defrecord link (module 'element_link)          id  actions (show_if 'true) (class '"") (style '"") (text '"") (body '"") (html_encode 'true) (url '"javascript:") postback)
+(defrecord error (module 'element_error)        id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 
 (defrecord flash (module 'element_flash)        id actions (show_if 'true) (class '"") (style '""))
 (defrecord p (module 'element_p)                id actions (show_if 'true) (class '"") (style '""))
