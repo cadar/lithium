@@ -32,9 +32,5 @@
             (_ (tuple 'undefined 'undefined)))))
     (get-source module)))
 
-(defun title () '"LFEweb")
-
-(defun body () (make-label text '"First <h1>LFEweb</h1> page"))
-
 (defun event (_) 'ok)
 
