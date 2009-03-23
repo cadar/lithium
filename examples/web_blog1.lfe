@@ -25,7 +25,7 @@
 
 
 (defun event 
-  (('checkbox_clicked) (: wf flash (list '"klicked, " (: wf q 'check1))) 'ok)
+  (('checkbox_clicked) (: wf flash (list '"clicked, " (: wf q 'check1))) 'ok)
   (('box1) (: wf flash (list '"box1 is " (: wf q 'box1))) 'ok)
   (('save) (: wf flash (list (: wf q 'inbox1) 
                              '" Saved " 

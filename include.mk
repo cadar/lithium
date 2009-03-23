@@ -32,9 +32,11 @@ MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=))
 
 check-syntax:
 	erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
-	mv $(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
-	@screen -p server -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' >> compile.out 2>> compile.err
-	@echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242 >> compile.out 2>> compile.err
+#	mv $(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
+#	prerequisite 1. Only one screen, 2. run "screen","screen -t server1","sh start.sh" 
+#	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' >> compile.out 2>> compile.err
+#	Install mozrepl for page reload, http://wiki.github.com/bard/mozrepl
+#	@echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242 >> compile.out 2>> compile.err
 
 
 help:
