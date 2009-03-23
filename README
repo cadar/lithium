@@ -6,7 +6,9 @@ Erlang - A functional language used to build high available telephone switches.
 
 ---
 
-LFEweb project live inside of a Nitrogen project. It attach to the edit-compile cycle using Makefile includes. LFEweb pages live side by side with Nitrogen pages, and both get compiled with "make all".
+This project just started. If you want to know what is working, visit http://www.lfeweb.org.
+
+LFEweb project live inside a Nitrogen project. It attach to the edit-compile cycle using Makefile includes. LFEweb pages live side by side with Nitrogen pages, and both get compiled with "make all".
 
 ---
 
