@@ -9,7 +9,7 @@ LOBJS=$(LSRCS:.lfe=.beam)
 LFE_EBIN=${HOME}/lfe/ebin/
 
 ERL_LOAD='code:load_file(lfe_comp).'
-ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[{outdir,"./ebin"}]) of {ok,_Module} -> halt(0); error -> halt(0); All ->  io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(0).'
+ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File) of {ok,_Module} -> halt(0); error -> halt(1); All ->  io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(1).'
 
 .PHONY: all
 
@@ -17,8 +17,7 @@ all: compile $(LOBJS)
 
 %.beam : %.lfe
 	@echo Recompile: $<
-	@erl -noshell -pa $(LFE_EBIN) -eval $(ERL_LOAD) -eval $(ERL_COMP) \
-	-extra $< 
+	@erl -noshell -pa $(LFE_EBIN) -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
 lclean: clean
 	rm -rf compile.err compile.out *.dump 
@@ -30,15 +29,12 @@ wipe: clean lclean
 FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
 BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
 MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=)) 
-LOG=2> compile.err | tee compile.out
 
 check-syntax:
-	@erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) \ 
-	-extra  $(CHK_SOURCES) $(LOG)
-	mv ebin/$(FLY_BEAM) ebin/$(BEAM)  $(LOG)
-	@screen -p server -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).'
-	echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242
-
+	erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
+	mv $(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
+	@screen -p server -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' >> compile.out 2>> compile.err
+	@echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242 >> compile.out 2>> compile.err
 
 
 help:
