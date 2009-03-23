@@ -3,7 +3,7 @@ vpath %.lfe  ./lfeweb/examples
 vpath %.beam ./ebin
 
 
-LSRCS=web_blog1.lfe web_viewsource.lfe $(AND_FILE)
+LSRCS=web_blog1.lfe web_viewsource.lfe web_vote.lfe $(AND_FILE)
 
 LOBJS=$(LSRCS:.lfe=.beam)
 LFE_EBIN=${HOME}/lfe/ebin/
@@ -32,6 +32,7 @@ MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=))
 
 check-syntax:
 	erl -noshell -pa ${LFE_EBIN} -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
+#	If flymake-mode is not working, comment lines below.
 #	mv $(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
 #	prerequisite 1. Only one screen, 2. run "screen","screen -t server1","sh start.sh" 
 #	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' >> compile.out 2>> compile.err
