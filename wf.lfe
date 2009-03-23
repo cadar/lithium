@@ -24,10 +24,16 @@
 (defrecord textarea (module 'element_textarea)  id actions (show_if 'true) (class '"") (style '"") (text (list 13)) (html_encode 'true))
 (defrecord datepicker_textbox 
   (module 'element_datepicker_textbox)          id actions (show_if 'true) (class '"") (style '"") (text '"") next (html_encode 'true) (validators '()) (options '"{dateFormat:'yy-mm-dd'}"))
+(defrecord inplace_textbox  
+  (module 'element_inplace_textbox)             id actions (show_if 'true) (class '"") (style '"") tag (text '"") (html_encode 'true) (start_mode 'view) (validators '()))
+(defrecord checkbox (module 'element_checkbox)  id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true) (checked 'false) postback)
+(defrecord panel (module 'element_panel)        id actions (show_if 'true) (class '"") (style '"") (text '"") (body '""))
 
 
+(defrecord alert (module 'element_alert)        id actions (show_if 'true) (class '"") (style '"") (text '""))
 (defrecord flash (module 'element_flash)        id actions (show_if 'true) (class '"") (style '""))
 (defrecord script (module 'action_script)       id actions (show_if 'true) (class '"") (style '"") script)
 (defrecord actionbase (module 'undefined)       trigger target actions (show_if 'true))
 (defrecord event (module 'action_event)         trigger target actions (show_if 'true) (type 'click) (delay 1) postback delegate)
+
 
