@@ -8,9 +8,8 @@
 (defun title () '"Tournament voting")
 
 (defun body () (list 
-                (make-hr)
-                (make-link url '"viewsource?module=web_vote" text '"source")))
-
+                (make-label text '"moduleinfo")
+                (make-link url '"/web/viewsource?module=web_vote" text '"source")))
 
 (defun event 
   (('save) (: wf flash (: wf q 'area1)) 'ok)
