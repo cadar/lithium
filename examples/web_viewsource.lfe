@@ -7,9 +7,9 @@
 
 (defun replacements
   ((()) '())
-  (((60 . t)) (cons 38 (cons 108 (cons 116 (cons 59 (replacements t))))))
-  (((9 . t)) (cons 32 (cons 32 (replacements t))))
-  (((h . t)) (cons h (replacements t))))
+  (((60 . t)) `(38 108 116 59 . ,(replacements t)))
+  (((9 . t))  `(32 32 . ,(replacements t)))
+  (((h . t))  `(,h . ,(replacements t))))
 
 (defun get-source
   ((module-arg)
@@ -17,9 +17,10 @@
           ;; Source not used! Compilerinfo do not have right value.
           (source (: proplists get_value 'source compilerinfo))  
           ((tuple 'ok b) (: file read_file (++ (path) (++ module-arg '".lfe")))))
-     (list '"<pre>" 
-           (replacements (binary_to_list b))
-           '"</pre>"))))
+     (list source  '"<br>"
+      '"<pre>" 
+      (replacements (binary_to_list b))
+      '"</pre>"))))
 
 (defun main ()
   (let* ((module (hd (: wf q 'module)))

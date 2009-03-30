@@ -5,7 +5,7 @@
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"The great blog")
+(defun title () '"My blog")
 
 (defun body () (list 
                 (make-label text '"Blog example")
