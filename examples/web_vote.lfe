@@ -5,11 +5,11 @@
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"Tournament voting")
+(defun title () '"Comet voting")
 
 (defun body () (list 
-                (make-label text '"moduleinfo")
-                (make-link url '"/web/viewsource?module=web_vote" text '"source")))
+                (make-hr)
+                (make-link url '"viewsource?module=web_vote" text '"source")))
 
 (defun event 
   (('save) (: wf flash (: wf q 'area1)) 'ok)

@@ -2,18 +2,17 @@
   (export all))
 (include-file "lfeweb/wf.lfe")
 
-(defun path ()  '"/Users/cadar/myproject/")
-
+(defun path ()  '"/home/cadar/myproject/wwwroot")
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"Here is a link to my disk, help your self.")
+(defun title () '"File upload test")
 
 (defun body () (list 
 		(make-upload tag 'myupload)
 		(make-panel id 'imagepanel body (make-image image '"/images/empty.png"))
 		(make-hr)
-                (make-link url '"/web/viewsource?module=web_link" text '"source")))
+                (make-link url '"viewsource?module=web_link" text '"source")))
 
 (defun event (_) 
   'ok)
@@ -26,7 +25,8 @@
      (: file copy 
        (++ (path) local-file-data) 
        (++ (path) file-and-path))
-     (: wf update 'imagepanel (make-image image file-and-path)))
+     (: io format '"~p uploaded~n" (list (++ (path) file-and-path)))
+     (: wf update 'imagepanel (make-image image (++ (path) file-and-path))))
    'ok))
 
 

@@ -5,11 +5,11 @@
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"Human sort")
+(defun title () '"Web sort")
 
 (defun body () (list 
 		(make-hr)
-                (make-link url '"/web/viewsource?module=web_vote" text '"source")))
+                (make-link url '"viewsource?module=web_sort" text '"source")))
 
 (defun event 
   (('save) (: wf flash (: wf q 'area1)) 'ok)
