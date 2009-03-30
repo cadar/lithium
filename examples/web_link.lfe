@@ -2,7 +2,7 @@
   (export all))
 (include-file "lfeweb/wf.lfe")
 
-(defun path ()  '"/home/cadar/myproject/wwwroot")
+(defun path ()  '"/home/cadar/myproject/")
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
@@ -10,7 +10,7 @@
 
 (defun body () (list 
 		(make-upload tag 'myupload)
-		(make-panel id 'imagepanel body (make-image image '"/images/empty.png"))
+		(make-panel id 'image-panel body (make-image image '"/images/empty.png"))
 		(make-hr)
                 (make-link url '"viewsource?module=web_link" text '"source")))
 
@@ -21,13 +21,17 @@
   (('myupload 'undefined _)  (: wf flash '"File missing.")
    'ok)
   (('myupload file-name local-file-data) 
-   (let ((file-and-path (++ '"/images/" file-name)))
+   (let* ((dest (++ '"/wwwroot/images/" file-name))
+	  (image-link (++ '"/images/" file-name)))
+     (: io format '"copy from ~p to ~p~n" (list (++ (path) local-file-data)  
+						(++ (path) dest)))
      (: file copy 
        (++ (path) local-file-data) 
-       (++ (path) file-and-path))
-     (: io format '"~p uploaded~n" (list (++ (path) file-and-path)))
-     (: wf update 'imagepanel (make-image image (++ (path) file-and-path))))
+       (++ (path) dest))
+     (: io format '"~p update link~n" (list image-link))
+     (: wf update 'image-panel (make-image image image-link)))
    'ok))
+
 
 
 
