@@ -1,4 +1,4 @@
-(define-module web_chat
+(define-module web_sort
   (export all))
 
 (include-file "lfeweb/wf.lfe")
@@ -11,8 +11,8 @@
   (ensure-database-running)
   (let* ((body (list 
 		(make-p)
-		(make-span text '"Yourchattrom")
-		(make-textbox id 'usernametextbox text '"anonym" style '"with: 100px" next 'message-text-box)
+		(make-span text '"Your chattrom")
+		(make-textbox id 'usernametextbox text '"Janne" style '"with: 100px" next 'message-text-box)
 		(make-p)
 		(make-panel id 'chathistory class 'chat_history)
 		(make-p)

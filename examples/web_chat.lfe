@@ -5,14 +5,14 @@
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"Web sort")
+(defun title () '"Web chat")
 
 (defun body () 
   (ensure-database-running)
   (let* ((body (list 
 		(make-p)
-		(make-span text '"Yourchattrom")
-		(make-textbox id 'usernametextbox text '"anonym" style '"with: 100px" next 'message-text-box)
+		(make-span text '"Your chattrom")
+		(make-textbox id 'usernametextbox text '"Neo" style '"with: 100px" next 'message-text-box)
 		(make-p)
 		(make-panel id 'chathistory class 'chat_history)
 		(make-p)
@@ -20,7 +20,7 @@
 		(make-br)
 		(make-button id 'sendbutton text '"Send" postback 'chat)
 		(make-hr)
-		(make-link url '"viewsource?module=web_sort" text '"source")))
+		(make-link url '"viewsource?module=web_chat" text '"source")))
 	 (pid (: wf comet (lambda () (listenformessages))))
 	 )
     (: io format '"comet pid is ~p, registered database is ~p~n" (list pid (whereis 'database)))
@@ -47,7 +47,6 @@
 		   (make-span text message class 'message))))
 	(: wf insert_bottom 'chathistory term)
 	(: wf wire '"obj('chathistory').scrollTop = obj('chathistory').scrollHeight;")
-	(: io format '"incoming:  ~p~p~n" (list username message))
 	(: wf comet_flush))))
   (listenformessages))
 
@@ -63,12 +62,11 @@
 			      (thedatabase (cons userpid users)) 
 			      ))
     ((tuple 'DOWN monitorref process userpid info) 
-     (begin 
-       (: io format '" DOWN ~p ~p~n" (list userpid info))
-       (thedatabase (: lists delete userpid users))))
+     (: io format '" DOWN ~p ~p~n" (list userpid info))
+     (thedatabase (: lists delete userpid users)))
     ((tuple 'message username message) 					 
-       (lc ((<- x users)) (! x (tuple 'message username message)))
-       (thedatabase users))))
+     (lc ((<- x users)) (! x (tuple 'message username message)))
+     (thedatabase users))))
 
 (defun ensure-database-running ()
   (let* ((dbpid (whereis 'database))
