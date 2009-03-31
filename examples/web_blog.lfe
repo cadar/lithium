@@ -1,4 +1,4 @@
-(define-module web_blog1
+(define-module web_blog
   (export all))
 
 (include-file "lfeweb/wf.lfe")

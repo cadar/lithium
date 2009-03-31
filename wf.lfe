@@ -11,7 +11,7 @@
 (defrecord listitem (module 'element_listitem)  id actions (show_if 'true) (class '"") (style '"") (numbered 'false) (body '()))
 (defrecord br (module 'element_br)              id actions (show_if 'true) (class '"") (style '""))
 (defrecord hr (module 'element_hr)              id actions (show_if 'true) (class '"") (style '""))
-(defrecord p (module 'element_p)                id actions (show_if 'true) (class '"") (style '""))
+(defrecord p (module 'element_p)                id actions (show_if 'true) (class '"") (style '"") (body '""))
 (defrecord label (module 'element_label)        id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 (defrecord value (module 'element_value)        id actions (show_if 'true) (class '"") (style '"") (html_encode 'true))
 (defrecord link (module 'element_link)          id actions (show_if 'true) (class '"") (style '"") (text '"") (body '"") (html_encode 'true) (url '"javascript:") postback)
@@ -46,5 +46,7 @@
 (defrecord script (module 'action_script)       id actions (show_if 'true) (class '"") (style '"") script)
 (defrecord actionbase (module 'undefined)       trigger target actions (show_if 'true))
 (defrecord event (module 'action_event)         trigger target actions (show_if 'true) (type 'click) (delay 1) postback delegate)
+(defrecord comet_start (module 'element_comet_start)  trigger target actions (show_if 'true))
+
 
 
