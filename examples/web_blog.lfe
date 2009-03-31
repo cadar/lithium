@@ -23,7 +23,7 @@
                 (make-br)
                 (make-button text '"unhandled box" postback 'unhandled1)
                 (make-hr)
-                (make-link url '"viewsource?module=web_blog1" text '"source")))
+                (make-link url '"viewsource?module=web_blog" text '"source")))
 
 
 (defun event 
