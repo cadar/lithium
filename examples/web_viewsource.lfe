@@ -18,9 +18,9 @@
           (source (: proplists get_value 'source compilerinfo))  
           ((tuple 'ok b) (: file read_file (++ (path) (++ module-arg '".lfe")))))
      (list '"<!-- " source  '" -->"
-      '"<pre>" 
-      (replacements (binary_to_list b))
-      '"</pre>"))))
+	   '"<pre>" 
+	   (replacements (binary_to_list b))
+	   '"</pre>"))))
 
 (defun main ()
   (let* ((module (hd (: wf q 'module)))

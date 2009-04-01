@@ -38,17 +38,17 @@
   
 (defun listenformessages ()
   (receive 
-     ((tuple 'message username message) 
-      (let ((term (list 
-		   (make-p)
-		   '"<"
-		   (make-span text username class 'username)
-		   '"> "
-		   (make-span text message class 'message))))
-	(: wf insert_bottom 'chathistory term)
-	(: wf wire '"obj('chathistory').scrollTop = obj('chathistory').scrollHeight;")
-	(: io format '"incoming:  ~p~p~n" (list username message))
-	(: wf comet_flush))))
+    ((tuple 'message username message) 
+     (let ((term (list 
+		  (make-p)
+		  '"<"
+		  (make-span text username class 'username)
+		  '"> "
+		  (make-span text message class 'message))))
+       (: wf insert_bottom 'chathistory term)
+       (: wf wire '"obj('chathistory').scrollTop = obj('chathistory').scrollHeight;")
+       (: io format '"incoming:  ~p~p~n" (list username message))
+       (: wf comet_flush))))
   (listenformessages))
 
 
@@ -58,28 +58,28 @@
     ('list (: io format '"List ~p~n" (list users))
 	   (thedatabase users))
     ((tuple 'join userpid) (begin 
-			      (: io format '"  ~p is joining ~p~n" (list userpid users))
-			      (: erlang monitor 'process userpid)
-			      (thedatabase (cons userpid users)) 
-			      ))
+			     (: io format '"  ~p is joining ~p~n" (list userpid users))
+			     (: erlang monitor 'process userpid)
+			     (thedatabase (cons userpid users)) 
+			     ))
     ((tuple 'DOWN monitorref process userpid info) 
      (begin 
        (: io format '" DOWN ~p ~p~n" (list userpid info))
        (thedatabase (: lists delete userpid users))))
     ((tuple 'message username message) 					 
-       (lc ((<- x users)) (! x (tuple 'message username message)))
-       (thedatabase users))))
+     (lc ((<- x users)) (! x (tuple 'message username message)))
+     (thedatabase users))))
 
 (defun ensure-database-running ()
   (let* ((dbpid (whereis 'database))
 	 (dbonline (andalso (/= dbpid 'undefined) (is_process_alive dbpid)))
 	 (dbonline2 'true))
     (: io format '"~nonline=~p dbpid=~p res=~p~n " (list dbonline 
-						     dbpid 
-						     (andalso
-						      (/= dbpid 'undefined)
-						      (is_process_alive dbpid))
-						     ))
+							 dbpid 
+							 (andalso
+							  (/= dbpid 'undefined)
+							  (is_process_alive dbpid))
+							 ))
     (case dbonline
       ('true 'ok)
       ('false (let* ((n (spawn (lambda () (thedatabase (list))))))
