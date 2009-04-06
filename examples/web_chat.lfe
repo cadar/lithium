@@ -11,13 +11,12 @@
   (ensure-database-running)
   (let* ((body (list 
 		(make-p)
-		(make-span text '"Your chatroom")
+		(make-span text '"Your chatroom name: ")
 		(make-textbox id 'usernametextbox text '"Neo" style '"with: 100px" next 'message-text-box)
 		(make-p)
 		(make-panel id 'chathistory class 'chat_history)
 		(make-p)
 		(make-textbox id 'messagetextbox style '"width: 70%;")
-		(make-br)
 		(make-button id 'sendbutton text '"Send" postback 'chat)
 		(make-hr)
 		(make-link url '"viewsource?module=web_chat" text '"source")))
@@ -51,7 +50,6 @@
 
 
 (defun thedatabase (users)
-  (: io format '"  thedatabase waiting...~n")
   (receive
     ('list (: io format '"List ~p~n" (list users))
 	   (thedatabase users))
@@ -71,15 +69,8 @@
   (let* ((dbpid (whereis 'database))
 	 (dbonline (andalso (/= dbpid 'undefined) (is_process_alive dbpid)))
 	 (dbonline2 'true))
-    (: io format '"~nonline=~p dbpid=~p res=~p~n " (list dbonline 
-							 dbpid 
-							 (andalso
-							  (/= dbpid 'undefined)
-							  (is_process_alive dbpid))
-							 ))
     (case dbonline
       ('true 'ok)
       ('false (let* ((n (spawn (lambda () (thedatabase (list))))))
 		(: io format '"register~n")
 		(register 'database n))))))
-
