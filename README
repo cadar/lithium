@@ -22,10 +22,10 @@ nitrogen create myproject
 cd myproject 
 git clone git://github.com/cadar/lfeweb.git
 echo include lfeweb/include.mk >> Makefile
-mv lfeweb/examples/web_blog1.lfe src/pages/
+mv lfeweb/examples/web_blog.lfe src/pages/
 make all
 sh start.sh
-curl localhost:8000/web/blog1
+curl localhost:8000/web/blog
 
 
 *   http://erlang.org/download.html

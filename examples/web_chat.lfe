@@ -11,7 +11,7 @@
   (ensure-database-running)
   (let* ((body (list 
 		(make-p)
-		(make-span text '"Your chattrom")
+		(make-span text '"Your chatroom")
 		(make-textbox id 'usernametextbox text '"Neo" style '"with: 100px" next 'message-text-box)
 		(make-p)
 		(make-panel id 'chathistory class 'chat_history)
