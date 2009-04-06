@@ -22,6 +22,6 @@
                 (make-br)
                 (make-link url '"http://github.com/cadar/lfeweb/tree/master" text '"LFEweb at github")
                 (make-hr)
-                (make-link url '"viewsource?module=web_index" text '"source")))
+                (make-link url '"/web/viewsource?module=web_index" text '"source")))
 
 (defun event (_) 'ok)
