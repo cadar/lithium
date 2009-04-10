@@ -12,8 +12,6 @@
                 (make-link url '"/web/blog" text '"Blog")
                 (make-br)
                 (make-link url '"/web/chat" text '"Chat")
-                (make-br)
-                (make-link url '"/web/link" text '"Upload")
                 (make-hr)
                 (make-label text '"Links")
                 (make-link url '"http://github.com/rvirding/lfe/tree/master" text '"LFE at github")
