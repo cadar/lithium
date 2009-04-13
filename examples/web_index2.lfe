@@ -15,7 +15,7 @@
                 (make-br)
                 (make-br)
                 (make-h2 text '"What to expect")
-                (make-p body '"A small warning to begin with. This page is not done, it's far from. The page will grow in the order I learn new interesting things. (Please help me if you think I'm going in the wrong direction. I love feedback. -> c a d a r 7 7 7 @ g m a i l . c o m) But basically, this is a test to see if Lfe can be used with Nitrogen. That's all.")
+                (make-p body '"A small warning to begin with. This page is not done.")
                 (make-h2 text '"Examples")
                 (make-link url '"/web/blog" text '"Blog")
                 (make-br)
@@ -40,8 +40,6 @@
 		(make-image image '"/images/responsetime.png")
 	 	(make-br)
 		(make-image image '"/images/throughput.png")
-                (make-h2 text '"Contribute to world progress")
-                (make-p body '"How? Help me create this page or run a copy on your own server.")
                 (make-hr)
                 (make-link url '"/web/viewsource?module=web_index2" text '"source")))
 
