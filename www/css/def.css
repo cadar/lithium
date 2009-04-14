@@ -1,5 +1,6 @@
-h1 { font-size: 48px; text-align: center; }
+h1 { font-size: 48px; text-align: center;}
 h3 { font-size: 18px; text-align: center;}
-.'p abstract' { font-style: italic; font-size: 18px; text-align: center;}
 p { font-family: Times ; }
-pre { font-family: courier new ; }
+pre {  width: 500px ; font-family: courier ; color: #999999  ;  padding: 5px 5px 5px 35px;}
+.abstract { font-family: Times ; font-style: italic; font-size: 14px; text-align: center;}
+.lfecode {  text-align: center ; }
