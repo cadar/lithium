@@ -7,6 +7,7 @@
 (defrecord h2 (module 'element_h2)              id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 (defrecord h3 (module 'element_h3)              id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 (defrecord h4 (module 'element_h4)              id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
+(defrecord pre (module 'element_pre)            id actions (show_if 'true) (class '"") (style '"") (text '"") (html_encode 'true))
 (defrecord list (module 'element_list)          id actions (show_if 'true) (class '"") (style '""))
 (defrecord listitem (module 'element_listitem)  id actions (show_if 'true) (class '"") (style '"") (numbered 'false) (body '()))
 (defrecord br (module 'element_br)              id actions (show_if 'true) (class '"") (style '""))

@@ -1,3 +1,5 @@
 h1 { font-size: 48px; text-align: center; }
 h3 { font-size: 18px; text-align: center;}
+.'p abstract' { font-style: italic; font-size: 18px; text-align: center;}
 p { font-family: Times ; }
+pre { font-family: courier new ; }
