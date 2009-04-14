@@ -27,9 +27,10 @@
                 (make-p body '"Lfeweb depends on Lfe and Nitrogen. Lfe and Nitrogen depends on Erlang. Therefor we start with the installation of Erlang. Erlang works on every operation system out there. We recommend testing it out on Linux with the latest Ubuntu.")
 
                 (make-p body '"<pre>
-mkdir ~/elib & cd ~/elib
+mkdir ~/elib && cd ~/elib
 git clone git://github.com/rvirding/lfe.git
 git clone git://github.com/rklophaus/nitrogen.git
+cd nitrogen && make
 echo export ERL_LIBS=~/elib/ >> ~/.bashrc
 echo export PATH=$PATH:~/elib/nitrogen/support/ >> ~/.bashrc
 source ~/.bashrc
