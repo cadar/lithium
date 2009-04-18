@@ -14,13 +14,13 @@
                 (make-br)
 
 
-                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe is created by Roberg Virding and work as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery functionality in the background, making it easier to work on an even higher abstraction level than before. This page hope to demonstrate how much of Nitrogen is working using Lfe – and hopefully – how addicting the lisp syntax is.")
+                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe, created by Roberg Virding, is as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery functionality in the background, making it easier to work on an even higher abstraction level than before. This page hope to demonstrate how much of Nitrogen is working using Lfe – and hopefully – how addictive the lisp syntax is.")
                 (make-br)
                 (make-br)
 
 
                 (make-h2 text '"What to expect")
-                (make-p body '"A small warning to begin with. This page is not done. If this could be a issue we recommend that you come back in a month or two. If new things excites you then keep on reading. Ok, Lisp is an old language with extremely simple concepts. If someone say Lisp is simple, that is true. But that doesn't mean that all you build with lisp will be simple. The most respectable thing you can do in software is to build simple things based on simple concepts. Let's go on and install Lfeweb, to see if things turn out simple.")
+                (make-p body '"A small warning to begin with. This page is not done. If this could be a issue we recommend that you come back in a month or two. If new things excites you then keep on reading. Ok, Lisp is an old language with extremely simple concepts. If someone say Lisp is simple, that is true. But that doesn't mean that all you build with lisp will be simple. The most respectable thing you can do with software is to build simple things. Let's go on and install Lfeweb, we will see if things turn out simple.")
 
 
                 (make-h2 text '"Install")
