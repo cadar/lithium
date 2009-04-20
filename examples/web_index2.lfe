@@ -65,6 +65,10 @@ curl localhost:8000/web/blog
 
                 (make-h2 text '"Examples")
                 (make-p body '"Here are working demo examples.")
+                (make-link url '"/web/counter" text '"Counter")
+                (make-br)
+                (make-link url '"/web/calc" text '"Calculator")
+                (make-br)
                 (make-link url '"/web/blog" text '"Blog")
                 (make-br)
                 (make-link url '"/web/chat" text '"Chat")

@@ -9,6 +9,10 @@
 
 (defun body () (list 
                 (make-label text '"Examples")
+                (make-link url '"/web/counter" text '"Counter")
+                (make-br)
+                (make-link url '"/web/calc" text '"Calculator")
+                (make-br)
                 (make-link url '"/web/blog" text '"Blog")
                 (make-br)
                 (make-link url '"/web/chat" text '"Chat")
