@@ -41,7 +41,12 @@
 (defrecord upload  
   (module 'element_upload)                      id actions (show_if 'true) (class '"") (style '"") tag 
   (show_button 'true) (button_text '"Upload"))
-
+(defrecord validate (module 'element_validate) 
+                id actions (show_if 'true) (class '"") (style '"")
+		(on 'submit) (success_text '" ") 'validators 'attacg_to)
+(defrecord validation_error (module 'element_validation_error) 
+                                                id actions (show_if 'true) (class '"") (style '"")
+						(text '""))
 (defrecord alert (module 'element_alert)        id actions (show_if 'true) (class '"") (style '"") (text '""))
 (defrecord flash (module 'element_flash)        id actions (show_if 'true) (class '"") (style '""))
 (defrecord script (module 'action_script)       id actions (show_if 'true) (class '"") (style '"") script)
@@ -51,3 +56,14 @@
 
 
 
+;; -define(VALIDATOR_BASE(Module), module=Module, text="Failed.").
+;; -record(validatorbase, {?VALIDATOR_BASE(undefined)}).
+;; -record(is_required, {?VALIDATOR_BASE(validator_is_required)}).
+(defrecord is_required (module 'validator_is_required) (text '"Failed."))
+;; -record(is_email, {?VALIDATOR_BASE(validator_is_email)}).
+;; -record(is_integer, {?VALIDATOR_BASE(validator_is_integer)}).
+;; -record(min_length, {?VALIDATOR_BASE(validator_min_length), length}).
+;; -record(max_length, {?VALIDATOR_BASE(validator_max_length), length}).
+;; -record(confirm_password, {?VALIDATOR_BASE(validator_confirm_password), password}).
+;; -record(custom, {?VALIDATOR_BASE(validator_custom), function, tag }).
+;; -record(js_custom, {?VALIDATOR_BASE(validator_js_custom), function, args="{}" }).

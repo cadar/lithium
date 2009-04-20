@@ -21,8 +21,7 @@
 		(make-button id 'sendbutton text '"Send" postback 'chat)
 		(make-hr)
 		(make-link url '"viewsource?module=web_sort" text '"source")))
-	 (pid (: wf comet (lambda () (listenformessages))))
-	 )
+	 (pid (: wf comet (lambda () (listen_for_messages)))))
     (: io format '"comet pid is ~p, registered database is ~p~n" (list pid (whereis 'database)))
     (! 'database (tuple 'join pid))
     (: wf render body)))
@@ -36,7 +35,7 @@
   ((all) (: wf flash (: wf f '"no match, ~p~n" (list all))) 'ok))
 
   
-(defun listenformessages ()
+(defun listen_for_messages ()
   (receive 
     ((tuple 'message username message) 
      (let ((term (list 
@@ -49,7 +48,7 @@
        (: wf wire '"obj('chathistory').scrollTop = obj('chathistory').scrollHeight;")
        (: io format '"incoming:  ~p~p~n" (list username message))
        (: wf comet_flush))))
-  (listenformessages))
+  (listen_for_messages))
 
 
 (defun thedatabase (users)

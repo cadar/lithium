@@ -3,7 +3,9 @@ vpath %.lfe  ./lfeweb/examples
 vpath %.beam ./ebin
 
 
-LSRCS=web_blog.lfe web_viewsource.lfe web_vote.lfe web_sort.lfe web_link.lfe web_chat.lfe $(AND_FILE)
+LSRCS=web_blog.lfe web_viewsource.lfe web_vote.lfe \
+      web_sort.lfe web_link.lfe web_chat.lfe web_piki.lfe \
+      web_counter.lfe web_calc.lfe  $(AND_FILE)
 LOBJS=$(LSRCS:.lfe=.beam)
 
 ERL_LOAD='code:load_file(lfe_comp).'
@@ -28,13 +30,15 @@ FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
 BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
 MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=)) 
 
+#	prerequisite 1. Only one screen, 2. run "screen","screen -t server1","sh start.sh" 
+#	Install mozrepl for page reload, http://wiki.github.com/bard/mozrepl
+
 check-syntax:
 	erl -noshell -pa ${HOME}/elib/lfe/ebin -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
 #	If flymake-mode is not working, comment lines below.
 	mv ebin/$(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
-#	prerequisite 1. Only one screen, 2. run "screen","screen -t server1","sh start.sh" 
-	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' >> compile.out 2>> compile.err
-#	Install mozrepl for page reload, http://wiki.github.com/bard/mozrepl
+	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' \
+		 >> compile.out 2>> compile.err
 	@echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242 >> compile.out 2>> compile.err
 
 

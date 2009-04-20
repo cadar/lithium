@@ -14,7 +14,8 @@
                 (make-br)
 
 
-                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe, created by Roberg Virding, is as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery functionality in the background, making it easier to work on an even higher abstraction level than before. This page hope to demonstrate how much of Nitrogen is working using Lfe – and hopefully – how addictive the lisp syntax is.")
+
+                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe, created by Roberg Virding, is as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery functionality in the background, making it possible to work on an even higher abstraction level than before. This page try to demonstrate how much of Nitrogen is working using Lfe – and hopefully – how addictive the lisp syntax is.")
                 (make-br)
                 (make-br)
 
