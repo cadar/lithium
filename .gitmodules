@@ -1,0 +1,9 @@
+[submodule "lib/hrl-to-lfe"]
+	path = lib/hrl-to-lfe
+	url = git://github.com/cadar/hrl-to-lfe.git
+[submodule "lib/nitrogen"]
+	path = lib/nitrogen
+	url = git://github.com/rklophaus/nitrogen.git
+[submodule "lib/lfe"]
+	path = lib/lfe
+	url = git://github.com/rvirding/lfe.git
