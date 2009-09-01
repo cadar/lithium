@@ -1,11 +1,13 @@
 vpath %.lfe  ./src/pages
-vpath %.lfe  ./lfeweb/examples
+vpath %.lfe  ./include
 vpath %.beam ./ebin
+vpath %.beam ./lib/lfe/ebin
+vpath %.beam ./lib/nitrogen/ebin
+vpath %.beam ./lib/mochiweb/ebin
+vpath %.beam ./lib/hrl-to-lfe
 
 
-LSRCS=web_blog.lfe web_viewsource.lfe web_vote.lfe \
-      web_sort.lfe web_link.lfe web_chat.lfe web_piki.lfe \
-      web_counter.lfe web_calc.lfe  $(AND_FILE)
+LSRCS=web_blog.lfe 
 LOBJS=$(LSRCS:.lfe=.beam)
 
 ERL_LOAD='code:load_file(lfe_comp).'
@@ -13,18 +15,45 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 
 .PHONY: all
 
-all: compile $(LOBJS)
+all: lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
+
+lfe: lfe_comp.beam
+lfe_comp.beam:
+	(cd lib/lfe ; make) 
+
+nitrogen: wf.beam
+wf.beam:
+	(cd lib/nitrogen ; make)
+
+hrl-to-lfe: h2l.beam
+h2l.beam:
+	(cd lib/hrl-to-lfe ; make)
+
+mochiweb: mochiweb.beam
+mochiweb.beam:
+	(cd lib/mochiweb ; make all)
+
+WF=./lib/nitrogen/include/wf.inc
+H2L=./lib/hrl-to-lfe/
+wf.lfe:
+	cat ${WF} | erl -pa ${H2L} -noshell -s h2l pipe > ./include/wf.lfe
 
 %.beam : %.lfe
 	@echo Recompile: $<
-	@erl -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
+	erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
 lclean: clean
 	rm -rf compile.err compile.out *.dump 
-
+clean: 
+	rm -rf ./ebin/*.beam
+	
 wipe: clean lclean
-	rm -rf *.beam
-
+	rm ./include/wf.lfe
+	(cd lib/lfe ; make clean)
+	(cd lib/nitrogen ; make clean)
+	(cd lib/mochiweb ; make clean)
+	(cd lib/h2l-to-lfe ; make clean)
+	
 
 FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
 BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
@@ -60,4 +89,4 @@ help:
 	@echo "                  (comint-send-string (inferior-moz-process)"
 	@echo "                                      \"BrowserReload();\")))"
 
-
+$(shell   mkdir -p ./lib/mochiweb/ebin)
