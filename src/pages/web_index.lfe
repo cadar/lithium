@@ -3,7 +3,7 @@
 
 (include-file "include/wf.lfe")
 
-(defun main () (make-template file '"./lfeweb/www/template.html"))
+(defun main () (make-template file '"./wwwroot/template.html"))
 
 (defun title () '"LFEweb")
 
