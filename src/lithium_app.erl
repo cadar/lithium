@@ -1,8 +1,8 @@
--module (nit2_app).
+-module (lithium_app).
 -export ([start/2, stop/1, route/1, request/1]).
 -behavior(application).
 
-start(_, _) -> nitrogen:start(nit2).
+start(_, _) -> nitrogen:start(lithium).
 stop(_) -> nitrogen:stop().
 
 %% route/1 lets you define new URL routes to your web pages, 

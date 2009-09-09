@@ -1,6 +1,6 @@
 (define-module web_link
   (export all))
-(include-file "lfeweb/wf.lfe")
+(include-file "include/wf.lfe")
 
 (defun path ()  '"/home/cadar/myproject/")
 

@@ -1,6 +1,6 @@
-{application, nit2, [
-	{description,  "Nitrogen Website"},
-	{mod, {nit2_app, []}},
+{application, lithium, [
+	{description,  "Lithium Website"},
+	{mod, {lithium_app, []}},
 	{env, [
 		{platform, inets}, %% {inets|yaws|mochiweb}
 		{port, 8000},

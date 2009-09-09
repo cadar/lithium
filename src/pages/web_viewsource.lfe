@@ -1,8 +1,8 @@
 (define-module web_viewsource
   (export all))
 
-(include-file "lfeweb/wf.lfe")
-(include-file "lfeweb/helpers.lfe")
+(include-file "include/wf.lfe")
+(include-file "include/helpers.lfe")
 (defun path () '"/home/cadar/myproject/lfeweb/examples/")
 
 (defun replacements

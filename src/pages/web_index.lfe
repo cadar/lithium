@@ -1,7 +1,7 @@
 (define-module web_index
   (export all))
 
-(include-file "lfeweb/wf.lfe")
+(include-file "include/wf.lfe")
 
 (defun main () (make-template file '"./lfeweb/www/template.html"))
 
