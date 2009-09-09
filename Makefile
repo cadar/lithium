@@ -15,7 +15,11 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 
 .PHONY: all
 
-all: lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
+all: update lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
+
+update: 
+	git submodule init
+	git submodule update
 
 lfe: lfe_comp.beam
 lfe_comp.beam:
@@ -27,7 +31,7 @@ wf.beam:
 
 hrl-to-lfe: h2l.beam
 h2l.beam:
-	(cd lib/hrl-to-lfe ; make)
+	(cd lib/hrl-to-lfe ; erl -make)
 
 mochiweb: mochiweb.beam
 mochiweb.beam:
