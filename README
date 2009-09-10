@@ -1,33 +1,11 @@
-LFEweb is using LFE to add lisp syntax to Nitrogen.
+Lithium is using LFE to add symbolic expressions with Nitrogen.
 
 LFE - Lisp Flavoured Erlang, is a lisp syntax front-end to the Erlang compiler. 
 Nitrogen - Nitrogen is an event-driven, Ajax enabled web framework for Erlang.
 Erlang - A functional language used to build high available telephone switches. 
 
----
-
-This project just started. If you want to know what is working, visit http://www.lfeweb.org.
-
-LFEweb project live inside a Nitrogen project. It attach to the edit-compile cycle using Makefile includes. LFEweb pages live side by side with Nitrogen pages, and both get compiled with "make all".
-
----
-
-Install 
--------
-
-1. Retrive Erlang*, LFE** and Nitrogen***.
-2. Run the following commands:
-
-nitrogen create myproject
-cd myproject 
-git clone git://github.com/cadar/lfeweb.git
-echo include lfeweb/include.mk >> Makefile
-mv lfeweb/examples/web_blog.lfe src/pages/
-make all
-sh start.sh
-curl localhost:8000/web/blog
-
-
-*   http://erlang.org/download.html
-**  http://github.com/rvirding/lfe/tree/master
-*** http://github.com/rklophaus/nitrogen/tree/master
+Install Lithium Site
+--------------------
+git clone git://github.com/cadar/lfeweb.git 
+cd lfeweb
+make start

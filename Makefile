@@ -74,8 +74,8 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 	@echo Recompile: $<
 	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
-start:
-	@echo Starting Lithium. ${ERL_TOP}
+start: init all
+	@echo Starting Lithium. 
 	@erl \
 	-name lithium@localhost \
 	-pa ./ebin \
