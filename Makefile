@@ -8,18 +8,34 @@ vpath %.beam ./lib/nitrogen/ebin
 vpath %.beam ./lib/mochiweb/ebin
 vpath %.beam ./lib/hrl-to-lfe
 
-
-LSRCS=lithium_app.lfe web_blog.lfe   web_index2.lfe  web_link.lfe  web_sort.lfe  web_vote.lfe web_calc.lfe  web_counter.lfe  web_index.lfe   web_piki.lfe  web_viewsource.lfe
-
+LSRCS=lithium_app.lfe web_blog.lfe web_index2.lfe web_link.lfe web_sort.lfe \
+	web_vote.lfe web_calc.lfe web_counter.lfe web_index.lfe web_piki.lfe \
+	web_viewsource.lfe web_chat.lfe
 LOBJS=$(LSRCS:.lfe=.beam) 
 
 .PHONY: all
-
 all: lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
 
-update: 
+##############
+# Prepare 
+##############
+
+init: 
+ifneq ($(shell erl -version 2>&1 |  sed 's/[^0-9]*//g'),572)
+	@echo This is only tested for 5.7.2, you are using \"${ERLVER}\"
+else
 	git submodule init
 	git submodule update
+	mkdir -p ./lib/mochiweb/ebin
+# Beam-files do not store source path, or? need help.
+	echo "(defun src-path () '\"`pwd`/src/pages/\")" > include/global_lithium.lfe
+	ln -sf ../lib/nitrogen/www wwwroot/nitrogen
+endif
+
+
+################
+# Compile dep
+################
 
 lfe: lfe_comp.beam
 lfe_comp.beam:
@@ -40,17 +56,23 @@ mochiweb.beam:
 WF=./lib/nitrogen/include/wf.inc
 H2L=./lib/hrl-to-lfe/
 wf.lfe:
+	# Convert wf.inc (Erlang hrl file) to lfe.
 	cat ${WF} | erl -pa ${H2L} -noshell -s h2l pipe > ./include/wf.lfe
 
+###############
+# Compile lfe
+###############
+
 ERL_LOAD='code:load_file(lfe_comp).'
-ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{outdir,"ebin"}]) of {ok,_Module} -> halt(0); error -> halt(1); All ->  io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(1).'
+ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{outdir,"ebin"}]) of {ok,_Module} -> halt(0); error -> halt(1); All -> io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(1).'
 
 %.beam : %.erl
-	erlc -o ebin $<
+	@echo Recompile: $<
+	@erlc -o ebin $<
 
 %.beam : %.lfe
 	@echo Recompile: $<
-	erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
+	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
 start:
 	@echo Starting Lithium. ${ERL_TOP}
@@ -63,11 +85,14 @@ start:
 	-eval "application:start(lithium)"
 
 
+############
+# Cleaning
+############
+
 lclean: clean
 	rm -rf compile.err compile.out *.dump 
 clean: 
 	rm -rf ./ebin/*.beam
-	
 wipe: clean lclean
 	rm ./include/wf.lfe
 	(cd lib/lfe ; make clean)
@@ -75,6 +100,10 @@ wipe: clean lclean
 	(cd lib/mochiweb ; make clean)
 	(cd lib/h2l-to-lfe ; make clean)
 	
+
+#################
+# Feedback loop
+#################
 
 FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
 BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
@@ -86,7 +115,7 @@ MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=))
 check-syntax:
 	erl -noshell -pa ${HOME}/elib/lfe/ebin -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
 #	If flymake-mode is not working, comment lines below.
-	mv ebin/$(FLY_BEAM) ebin/$(BEAM)  >  compile.out 2> compile.err
+	mv ebin/$(FLY_BEAM) ebin/$(BEAM) > compile.out 2> compile.err
 	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' \
 		 >> compile.out 2>> compile.err
 	@echo BrowserReload\(\)\; repl.quit\(\) | nc localhost 4242 >> compile.out 2>> compile.err
@@ -110,4 +139,3 @@ help:
 	@echo "                  (comint-send-string (inferior-moz-process)"
 	@echo "                                      \"BrowserReload();\")))"
 
-$(shell   mkdir -p ./lib/mochiweb/ebin)

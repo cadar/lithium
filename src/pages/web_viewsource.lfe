@@ -3,7 +3,7 @@
 
 (include-file "include/wf.lfe")
 (include-file "include/helpers.lfe")
-(defun path () '"/home/cadar/myproject/lfeweb/examples/")
+(include-file "include/global_lithium.lfe")
 
 (defun replacements
   ((()) '())
@@ -16,7 +16,7 @@
    (let* ((compilerinfo (call-str module-arg 'module_info 'compile))
           ;; Source not used! Compilerinfo do not have right value.
           (source (: proplists get_value 'source compilerinfo))  
-          ((tuple 'ok b) (: file read_file (++ (path) (++ module-arg '".lfe")))))
+          ((tuple 'ok b) (: file read_file (++ (src-path) (++ module-arg '".lfe")))))
      (list '"<!-- " source  '" -->"
 	   '"<pre>" 
 	   (replacements (binary_to_list b))
