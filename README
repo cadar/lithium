@@ -1,11 +1,35 @@
-Lithium is using LFE to make it possible to use sexps with Nitrogen.
+Lithium is a project template for building web applications with Nitrogen using sexps(LFE).
 
-LFE - Lisp Flavoured Erlang, is a lisp syntax front-end to the Erlang compiler. 
 Nitrogen - Nitrogen is an event-driven, Ajax enabled web framework for Erlang.
+LFE - Lisp Flavoured Erlang, is a lisp syntax front-end to the Erlang compiler. 
 Erlang - A functional language used to build high available telephone switches. 
 
-Install Lithium Site
---------------------
-git clone git://github.com/cadar/lfeweb.git 
-cd lfeweb
+
+Install Lithium
+---------------
+git clone git://github.com/cadar/lithium.git 
+cd lithium
 make start
+curl localhost:8000/web/blog
+
+
+
+If you don't have the latest erlang you need to install it. 
+
+Install Erlang (Ubuntu)
+--------------
+sudo apt-get install build-essential libncurses5-dev libssl-dev m4 git-core
+cd 
+wget http://erlang.org/download/otp_src_R13B01.tar.gz
+tar zxvf otp_src_R13B01.tar.gz
+cd otp_src_R13B01
+./configure 
+make
+echo "export PATH=\$PATH:~/otp_src_R13B01/bin" >> ~/.bashrc
+
+
+
+
+*   http://github.com/rvirding/lfe/tree/master
+**  http://github.com/rklophaus/nitrogen/tree/master
+*** http://code.google.com/p/mochiweb
