@@ -1,4 +1,4 @@
-Lithium is using LFE to add symbolic expressions with Nitrogen.
+Lithium is using LFE to make it possible to use sexps with Nitrogen.
 
 LFE - Lisp Flavoured Erlang, is a lisp syntax front-end to the Erlang compiler. 
 Nitrogen - Nitrogen is an event-driven, Ajax enabled web framework for Erlang.
