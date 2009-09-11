@@ -7,7 +7,6 @@ vpath %.beam ./lib/lfe/ebin
 vpath %.beam ./lib/nitrogen/ebin
 vpath %.beam ./lib/mochiweb/ebin
 vpath %.beam ./lib/hrl-to-lfe
-
 LSRCS=lithium_app.lfe web_blog.lfe web_index2.lfe web_link.lfe web_sort.lfe \
 	web_vote.lfe web_calc.lfe web_counter.lfe web_index.lfe web_piki.lfe \
 	web_viewsource.lfe web_chat.lfe
@@ -75,8 +74,8 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
 start: init all
-	@echo Starting Lithium. 
-	@erl \
+	@echo Starting Lithium.  
+	@ERL_LIBS=`pwd`/lib erl \
 	-name lithium@localhost \
 	-pa ./ebin \
 	-pa ./lib/lfe/ebin \
