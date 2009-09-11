@@ -7,7 +7,7 @@ vpath %.beam ./lib/lfe/ebin
 vpath %.beam ./lib/nitrogen/ebin
 vpath %.beam ./lib/mochiweb/ebin
 vpath %.beam ./lib/hrl-to-lfe
-LSRCS=lithium_app.lfe web_blog.lfe web_index2.lfe web_link.lfe web_sort.lfe \
+LSRCS=lithium_app.lfe web_blog.lfe web_link.lfe web_sort.lfe \
 	web_vote.lfe web_calc.lfe web_counter.lfe web_index.lfe web_piki.lfe \
 	web_viewsource.lfe web_chat.lfe
 LOBJS=$(LSRCS:.lfe=.beam) 
@@ -18,9 +18,9 @@ all: lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
 ##############
 # Prepare 
 ##############
-
+ERLVER=$(shell erl -version 2>&1 |  sed 's/[^0-9]*//g')
 init: 
-ifneq ($(shell erl -version 2>&1 |  sed 's/[^0-9]*//g'),572)
+ifneq (${ERLVER},572)
 	@echo This is only tested for 5.7.2, you are using \"${ERLVER}\"
 else
 	git submodule init
@@ -38,11 +38,11 @@ endif
 
 lfe: lfe_comp.beam
 lfe_comp.beam:
-	(cd lib/lfe ; make) 
+	(cd lib/lfe ; $(MAKE)) 
 
 nitrogen: wf.beam
 wf.beam:
-	(cd lib/nitrogen ; make)
+	(cd lib/nitrogen ; $(MAKE))
 
 hrl-to-lfe: h2l.beam
 h2l.beam:
@@ -50,7 +50,7 @@ h2l.beam:
 
 mochiweb: mochiweb.beam
 mochiweb.beam:
-	(cd lib/mochiweb ; make all)
+	(cd lib/mochiweb ; $(MAKE) all)
 
 WF=./lib/nitrogen/include/wf.inc
 H2L=./lib/hrl-to-lfe/
@@ -73,7 +73,7 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 	@echo Recompile: $<
 	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
 
-start: init all
+start: all
 	@echo Starting Lithium.  
 	@ERL_LIBS=`pwd`/lib erl \
 	-name lithium@localhost \
@@ -94,10 +94,10 @@ clean:
 	rm -rf ./ebin/*.beam
 wipe: clean lclean
 	rm ./include/wf.lfe
-	(cd lib/lfe ; make clean)
-	(cd lib/nitrogen ; make clean)
-	(cd lib/mochiweb ; make clean)
-	(cd lib/h2l-to-lfe ; make clean)
+	(cd lib/lfe ; $(MAKE) clean)
+	(cd lib/nitrogen ; $(MAKE) clean)
+	(cd lib/mochiweb ; $(MAKE) clean)
+	(cd lib/h2l-to-lfe ; $(MAKE) clean)
 	
 
 #################

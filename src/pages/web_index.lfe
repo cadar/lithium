@@ -27,7 +27,7 @@
                 (make-br)
                 (make-link url '"http://github.com/rklophaus/nitrogen/tree/master" text '"Nitrogen at github")
                 (make-br)
-                (make-link url '"http://github.com/cadar/lfeweb/tree/master" text '"LFEweb at github")
+                (make-link url '"http://github.com/cadar/lithium/tree/master" text '"Lithium at github")
                 (make-hr)
                 (make-link url '"/web/viewsource?module=web_index" text '"source")))
 

@@ -6,14 +6,13 @@ Erlang - A functional language used to build high available telephone switches.
 
 
 
-
 Install 
 -------
 git clone git://github.com/cadar/lithium.git 
 cd lithium
-make start
+make init
+make start 
 curl localhost:8000/web/blog
-
 
 
 
@@ -28,14 +27,15 @@ wget http://erlang.org/download/otp_src_R13B01.tar.gz
 tar zxvf otp_src_R13B01.tar.gz
 cd otp_src_R13B01
 ./configure 
-make
+make 
 echo "export PATH=\$PATH:~/otp_src_R13B01/bin" >> ~/.bashrc
 
 
 
 
-
-
+Troubleshooting
+---------------
+"Makefile", line 1: Need an operator -> Try "gmake start".
 
 
 *   http://github.com/rvirding/lfe/tree/master
