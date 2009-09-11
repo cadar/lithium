@@ -5,12 +5,16 @@ LFE - Lisp Flavoured Erlang, is a lisp syntax front-end to the Erlang compiler.
 Erlang - A functional language used to build high available telephone switches. 
 
 
+
+
 Install Lithium
 ---------------
-git clone git://github.com/cadar/lithium.git 
-cd lithium
-make start
-curl localhost:8000/web/blog
+    git clone git://github.com/cadar/lithium.git 
+    cd lithium
+    make start
+    curl localhost:8000/web/blog
+
+
 
 
 
@@ -18,14 +22,18 @@ If you don't have the latest erlang you need to install it.
 
 Install Erlang (Ubuntu)
 --------------
-sudo apt-get install build-essential libncurses5-dev libssl-dev m4 git-core
-cd 
-wget http://erlang.org/download/otp_src_R13B01.tar.gz
-tar zxvf otp_src_R13B01.tar.gz
-cd otp_src_R13B01
-./configure 
-make
-echo "export PATH=\$PATH:~/otp_src_R13B01/bin" >> ~/.bashrc
+    sudo apt-get install build-essential libncurses5-dev libssl-dev m4 git-core
+    cd 
+    wget http://erlang.org/download/otp_src_R13B01.tar.gz
+    tar zxvf otp_src_R13B01.tar.gz
+    cd otp_src_R13B01
+    ./configure 
+    make
+    echo "export PATH=\$PATH:~/otp_src_R13B01/bin" >> ~/.bashrc
+
+
+
+
 
 
 
