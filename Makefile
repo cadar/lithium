@@ -1,5 +1,4 @@
 vpath %.lfe  ./src
-vpath %.erl  ./src
 vpath %.lfe  ./src/pages
 vpath %.lfe  ./include
 vpath %.beam ./ebin
