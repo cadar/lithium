@@ -7,3 +7,6 @@
 [submodule "lib/lfe"]
 	path = lib/lfe
 	url = git://github.com/rvirding/lfe.git
+[submodule "lib/mochiweb"]
+	path = lib/mochiweb
+	url = git://github.com/clones/mochiweb.git
