@@ -14,7 +14,7 @@ LSRCS=lithium_app.lfe web_blog.lfe web_link.lfe web_sort.lfe \
 LOBJS=$(LSRCS:.lfe=.beam) 
 
 .PHONY: all
-all: lfe nitrogen mochiweb hrl-to-lfe wf.lfe $(LOBJS)
+all: lfe mochiweb nitrogen hrl-to-lfe wf.lfe $(LOBJS)
 
 ##############
 # Prepare 
@@ -50,7 +50,8 @@ else
 	git submodule update
 	mkdir -p ./lib/mochiweb/ebin
 # Beam-files do not store source path, or? need help.
-	echo "(defun src-path () '\"`pwd`/src/pages/\")" > include/global_lithium.lfe
+	echo "(defun updated () '\"`date +"%F %R"`\")" > include/global_lithium.lfe
+	echo "(defun src-path () '\"`pwd`/src/pages/\")" >> include/global_lithium.lfe
 	ln -sf ../lib/nitrogen/www wwwroot/nitrogen
 	@echo
 	@echo Success! Now run \"make start\".
@@ -100,7 +101,7 @@ ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{o
 start: all
 ifneq (${ERLVER},572)
 	@echo This is only tested for 5.7.2, you are using \"${ERLVER}\"
-	@echo Type \"make erlang\".
+	@echo Type \"make erlang\" to install a local copy in lib folder.
 else
 	@echo Starting Lithium.  
 	@ERL_LIBS=`pwd`/lib erl \

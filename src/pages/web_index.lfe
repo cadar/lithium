@@ -2,10 +2,11 @@
   (export all))
 
 (include-file "include/wf.lfe")
+(include-file "include/global_lithium.lfe")
 
 (defun main () (make-template file '"./wwwroot/template.html"))
 
-(defun title () '"LFEweb")
+(defun title () '"LFE on the web")
 
 (defun body () (list 
  (make-h3 text '"A world record in code reuse")
@@ -29,6 +30,9 @@
                 (make-br)
                 (make-link url '"http://github.com/cadar/lithium/tree/master" text '"Lithium at github")
                 (make-hr)
-                (make-link url '"/web/viewsource?module=web_index" text '"source")))
+                (updated)))
+
+(defun source () 
+                (make-link url '"/web/viewsource?module=web_index" text '"source"))
 
 (defun event (_) 'ok)
