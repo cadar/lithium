@@ -24,9 +24,10 @@ erlang:
 	(cd lib/otp_src_R13B01 && ./configure)
 	(cd lib/otp_src_R13B01 && ${MAKE})
 	@echo
-	@echo We need the bin folder first in PATH variable:
-	@echo export PATH=~/lithium/lib/otp_src_R13B01/bin:\$$PATH
-	@echo Now run ""make init"".
+	@echo \### We need the bin folder first in PATH:
+	@echo export PATH=$(shell pwd)/lib/otp_src_R13B01/bin:\$$PATH
+	@echo \### 
+	@echo Success! Now run \"make init\".
 
 ERLVER=$(shell erl -version 2>&1 |  sed 's/[^0-9]*//g')
 init: 
@@ -42,15 +43,15 @@ ifneq (${ERLVER},572)
 	@echo ./configure 
 	@echo ${MAKE}
 	@echo cd ../..
-	@echo export PATH=~/lithium/lib/otp_src_R13B01/bin:\$$PATH
+	@echo export PATH=$(shell pwd)/lib/otp_src_R13B01/bin:\$$PATH
 	@echo ${MAKE} init
 else
 	git submodule init
 	git submodule update
 	mkdir -p ./lib/mochiweb/ebin
 # Beam-files do not store source path, or? need help.
-	echo "(defun updated () '\"`date +"%F %R"`\")" > include/global_lithium.lfe
-	echo "(defun src-path () '\"`pwd`/src/pages/\")" >> include/global_lithium.lfe
+	echo "(defun updated () '\"$(shell date +"%F %R")\")" > include/global_lithium.lfe
+	echo "(defun src-path () '\"$(shell pwd)/src/pages/\")" >> include/global_lithium.lfe
 	ln -sf ../lib/nitrogen/www wwwroot/nitrogen
 	@echo
 	@echo Success! Now run \"make start\".

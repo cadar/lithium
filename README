@@ -16,26 +16,14 @@ curl localhost:8000/web/blog
 
 
 
-
-If you don't have the latest erlang you need to install it. 
-
-Install Erlang (Ubuntu)
---------------
-sudo apt-get install build-essential libncurses5-dev libssl-dev m4 git-core
-cd 
-wget http://erlang.org/download/otp_src_R13B01.tar.gz
-tar zxvf otp_src_R13B01.tar.gz
-cd otp_src_R13B01
-./configure 
-make 
-echo "export PATH=\$PATH:~/otp_src_R13B01/bin" >> ~/.bashrc
-
+If you don't have the latest erlang type "make erlang", then it will install 
+in your project folder without effecting your system.
 
 
 
 Troubleshooting
 ---------------
-"Makefile", line 1: Need an operator -> Try "gmake start".
+"Makefile", line 1: Need an operator -> Try using gmake.
 
 
 *   http://github.com/rvirding/lfe/tree/master
