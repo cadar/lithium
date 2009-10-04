@@ -65,9 +65,9 @@
    (let ((from-user (hd (: wf q 'usernametextbox1)))               
          (message (hd (: wf q 'message1))))
      (format '"  Event arrived from interface ~p ~p~n" (list from-user message))
-     (! 'database (tuple 'send-to-all message from-user)) ; ---- 'send-to-all ----
-     (: wf wire '"obj('message1').value=''")              ;                      |
-     'ok))                                                ;                      V
+     (! 'database (tuple 'send-to-all message from-user)) ; ----- 'send-to-all -----
+     (: wf wire '"obj('message1').value=''")              ;                        |
+     'ok))                                                ;                        V
   (('list) 
    (! 'database 'list))
   ((all) 
@@ -110,9 +110,10 @@
                  (database (cons user-pid users))))
                                                    ;                             |   
               ((t 'send-to-all message from-user)  ;  <----- 'send-to-all --------
-               (lc ((<- user-proxy-pid users))     ;                                      ^
-                   (! user-proxy-pid               ;                                      |
-                       (tuple 'new message from-user))) ; ----------- 'new ---------------|
+               (: lists foreach 
+                 (lambda (user-proxy-pid)                             ;                   ^
+                   (! user-proxy-pid (tuple 'new message from-user))) ; ----- 'new -------|
+                 users)
                (database users))
 
               ('list (format '"  List ~p~n" (list users))
