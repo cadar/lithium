@@ -23,7 +23,7 @@ in your project folder without effecting your system.
 
 Troubleshooting
 ---------------
-"Makefile", line 1: Need an operator -> Try using gmake.
+"Makefile", line 1: Need an operator -> Try gmake.
 
 
 *   http://github.com/rvirding/lfe/tree/master
