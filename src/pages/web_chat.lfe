@@ -25,9 +25,9 @@
 ;;        /|\
 ;;       / | \ pid
 ;;      .  |  v
-;;     .   |  user-interface-proxy ('new-message from-user message)
+;;     .   |  user-interface-proxy ('new message from-user)
 ;;         v
-;;        user-interace-proxy  ('new-message from-user message)
+;;        user-interace-proxy  ('new message from-user)
 ;;         |
 ;;         | comet 
 ;;         v
@@ -44,13 +44,13 @@
   (let* ((body (list 
                 (make-p)
                 (make-span text '"Your chatroom name: ")
-                (make-textbox id 'usernametextbox text '"Neo" style '"with: 100px" next 'message-text-box)
+                (make-textbox id 'usernametextbox1 text '"Neo" style '"with: 100px")
                 (make-p)
-                (make-panel id 'chathistory class 'chat_history)
+                (make-panel id 'chathistory1 class 'chat_history)
                 (make-p)
-                (make-textbox id 'message style '"width: 70%;")
-                (make-button id 'sendbutton text '"Send" postback 'chat) ; ----------------- *start here*
-                (make-button id 'listbutton text '"List" postback 'list) ;                 |
+                (make-textbox id 'message1 style '"width: 70%;")
+                (make-button id 'sendbutton1 text '"Send" postback 'chat) ; ---------------- *start here*
+                (make-button id 'listbutton1 text '"List" postback 'list) ;                |
                 (make-hr)                                                              ;   |
                 (make-link url '"viewsource?module=web_chat" text '"source")))         ;   |
          (proxy-pid (: wf comet (lambda () (user-interface-proxy)))))                  ;   |
@@ -62,11 +62,11 @@
                                                                                        ;   |
 (defun event                                              ;                                |
   (('chat)                                                ; <----------- 'chat -------------
-   (let ((from-user (hd (: wf q 'usernametextbox)))               
-         (message (hd (: wf q 'message))))
+   (let ((from-user (hd (: wf q 'usernametextbox1)))               
+         (message (hd (: wf q 'message1))))
      (format '"  Event arrived from interface ~p ~p~n" (list from-user message))
      (! 'database (tuple 'send-to-all message from-user)) ; ---- 'send-to-all ----
-     (: wf wire '"obj('message').value=''")               ;                      |
+     (: wf wire '"obj('message1').value=''")              ;                      |
      'ok))                                                ;                      V
   (('list) 
    (! 'database 'list))
@@ -84,8 +84,8 @@
                   (make-p) 
                   '"<" (make-span text from-user class 'username) '"> "
                   (make-span text message class 'message))))
-       (: wf insert_bottom 'chathistory html)
-       (: wf wire '"obj('chathistory').scrollTop = obj('chathistory').scrollHeight;")
+       (: wf insert_bottom 'chathistory1 html)
+       (: wf wire '"obj('chathistory1').scrollTop = obj('chathistory1').scrollHeight;")
        (: wf comet_flush))))  ; update html *the end*
   (user-interface-proxy))
 
