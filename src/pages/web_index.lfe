@@ -12,7 +12,7 @@
  (make-h3 text '"A world record in code reuse")
                 (make-h3 text '"(50 years of Lisp, 20 years of Erlang, 5 months of Nitrogen)")
                 (make-br)
-                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe, created by Roberg Virding, is as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery in the background; making it possible to work on an even higher level than before.")
+                (make-panel class '"abstract" body '"Abstract: Lfeweb is using Lfe (Lisp Flavoured Erlang) to add lisp syntax to Nitrogen. Lfe, created by Robert Virding, is as a lisp syntax front-end to the Erlang compiler. Nitrogen is a web framework created by Rusty Klophaus that put javascript, comet and jquery in the background; making it possible to work on an even higher level than before.")
                 (make-hr)
                 (make-label text '"Examples")
                 (make-link url '"/web/counter" text '"Counter")
