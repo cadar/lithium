@@ -51,7 +51,7 @@ else
 	git submodule update
 	mkdir -p ./lib/mochiweb/ebin
 # Beam-files do not store source path, or? need help.
-	echo "(defun updated () '\"$(shell date +"%F %R")\")" > include/global_lithium.lfe
+	echo "(defun updated () '\"<I>$(shell date +"%F %R - cadar")</I>\")" > include/global_lithium.lfe
 	echo "(defun src-path () '\"$(shell pwd)/src/pages/\")" >> include/global_lithium.lfe
 	ln -sf ../lib/nitrogen/www wwwroot/nitrogen
 	@echo

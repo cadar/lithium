@@ -99,7 +99,7 @@
 
 
 ;; ---------- shared code (server) ---------
-;; Datbase stores user-interface-proxy pid's.
+;; Database store user-interface-proxy pid's.
 (defun database (users)
   (macrolet ((t (arglist `(tuple ,@arglist))))  ;; make t = tuple
             (receive
