@@ -20,6 +20,11 @@ If you don't have the latest erlang type "make erlang", then it will install
 in your project folder without effecting your system.
 
 
+Update submodules
+-----------------
+git submodule foreach git pull origin master
+
+
 
 Troubleshooting
 ---------------
