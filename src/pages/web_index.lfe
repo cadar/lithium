@@ -8,7 +8,7 @@
 
 (defun title () '"LFE on the web")
 
-(defun body () (list 
+(defun body () (list
  (make-h3 text '"A world record in code reuse")
                 (make-h3 text '"(50 years of Lisp, 20 years of Erlang, 1 year of Nitrogen)")
                 (make-br)
@@ -32,7 +32,7 @@
                 (make-hr)
                 (updated)))
 
-(defun source () 
+(defun source ()
                 (make-link url '"/web/viewsource?module=web_index" text '"source"))
 
 (defun event (_) 'ok)

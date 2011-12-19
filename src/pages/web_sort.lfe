@@ -7,9 +7,9 @@
 
 (defun title () '"Web sort")
 
-(defun body () 
+(defun body ()
   (ensure-database-running)
-  (let* ((body (list 
+  (let* ((body (list
 		(make-p)
 		(make-span text '"Your chattrom")
 		(make-textbox id 'usernametextbox text '"Janne" style '"with: 100px" next 'message-text-box)
@@ -26,7 +26,7 @@
     (! 'database (tuple 'join pid))
     (: wf render body)))
 
-(defun event 
+(defun event
   (('chat) (let ((username (hd (: wf q 'usernametextbox)))
 		 (message (hd (: wf q 'messagetextbox))))
 	     (: io format '"Event arrived ~p ~p~n" (list username message))
@@ -34,11 +34,11 @@
 	     'ok))
   ((all) (: wf flash (: wf f '"no match, ~p~n" (list all))) 'ok))
 
-  
+
 (defun listen_for_messages ()
-  (receive 
-    ((tuple 'message username message) 
-     (let ((term (list 
+  (receive
+    ((tuple 'message username message)
+     (let ((term (list
 		  (make-p)
 		  '"<"
 		  (make-span text username class 'username)
@@ -56,16 +56,16 @@
   (receive
     ('list (: io format '"List ~p~n" (list users))
 	   (thedatabase users))
-    ((tuple 'join userpid) (begin 
+    ((tuple 'join userpid) (begin
 			     (: io format '"  ~p is joining ~p~n" (list userpid users))
 			     (: erlang monitor 'process userpid)
-			     (thedatabase (cons userpid users)) 
+			     (thedatabase (cons userpid users))
 			     ))
-    ((tuple 'DOWN monitorref process userpid info) 
-     (begin 
+    ((tuple 'DOWN monitorref process userpid info)
+     (begin
        (: io format '" DOWN ~p ~p~n" (list userpid info))
        (thedatabase (: lists delete userpid users))))
-    ((tuple 'message username message) 					 
+    ((tuple 'message username message)
      (lc ((<- x users)) (! x (tuple 'message username message)))
      (thedatabase users))))
 
@@ -73,8 +73,8 @@
   (let* ((dbpid (whereis 'database))
 	 (dbonline (andalso (/= dbpid 'undefined) (is_process_alive dbpid)))
 	 (dbonline2 'true))
-    (: io format '"~nonline=~p dbpid=~p res=~p~n " (list dbonline 
-							 dbpid 
+    (: io format '"~nonline=~p dbpid=~p res=~p~n " (list dbonline
+							 dbpid
 							 (andalso
 							  (/= dbpid 'undefined)
 							  (is_process_alive dbpid))

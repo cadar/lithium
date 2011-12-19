@@ -15,10 +15,10 @@
   ((module-arg)
    (let* ((compilerinfo (call-str module-arg 'module_info 'compile))
           ;; Source not used! Compilerinfo do not have right value.
-          (source (: proplists get_value 'source compilerinfo))  
+          (source (: proplists get_value 'source compilerinfo))
           ((tuple 'ok b) (: file read_file (++ (src-path) (++ module-arg '".lfe")))))
      (list '"<!-- " source  '" -->"
-	   '"<pre>" 
+	   '"<pre>"
 	   (replacements (binary_to_list b))
 	   '"</pre>"))))
 
