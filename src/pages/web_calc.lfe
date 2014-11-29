@@ -7,8 +7,8 @@
 
 (defun title () '"Web calculator")
 
-(defun body () 
-	 (list 
+(defun body ()
+	 (list
 	  (make-textbox id 'number1 text '"")
 	  (make-br)
 	  (make-textbox id 'number2  text '"")
@@ -19,8 +19,8 @@
 	  (make-hr)
 	  (make-link url '"viewsource?module=web_calc" text '"source")))
 
-(defun event 
-  (('add_button) 
+(defun event
+  (('add_button)
    (let* ((s1 (: wf q 'number1))
           (s2 (: wf q 'number2))
           (n1 (list_to_integer (: lists flatten s1)))
@@ -28,7 +28,7 @@
           (sum1 (+ n1 n2)))
      (: wf update 'res1 (integer_to_list sum1)))
    'ok)
-  (('clear_button) 
+  (('clear_button)
    (: wf wire '"obj('number1').value=''; obj('number2').value='';") 'ok)
   ((all) (: wf flash (: wf f '"no match, ~p~n" (list all))) 'ok))
 

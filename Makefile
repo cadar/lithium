@@ -7,11 +7,11 @@ vpath %.beam ./lib/nitrogen/ebin
 vpath %.beam ./lib/mochiweb/ebin
 vpath %.beam ./lib/hrl-to-lfe
 
-LSRCS := $(wildcard src/*.lfe src/pages/*.lfe)  
-LOBJS := ebin/lithium_app.beam $(LSRCS:src/pages/%.lfe=ebin/%.beam) 
+LSRCS := $(wildcard src/*.lfe src/pages/*.lfe)
+LOBJS := ebin/lithium_app.beam $(LSRCS:src/pages/%.lfe=ebin/%.beam)
 
 .PHONY: all
-all: mochiweb nitrogen lfe hrl-to-lfe wf.lfe global_lithium.lfe $(LOBJS) 
+all: mochiweb nitrogen lfe hrl-to-lfe wf.lfe global_lithium.lfe $(LOBJS)
 
 ################ Prepare ################
 
@@ -23,10 +23,10 @@ erlang:
 	@echo
 	@echo \### We need the bin folder first in PATH:
 	@echo export PATH=$(shell pwd)/lib/otp_src_R13B03/bin:\$$PATH
-	@echo \### 
+	@echo \###
 	@echo Success! Now run \"make init\".
 
-init: 
+init:
 	git submodule init
 	git submodule update
 	mkdir -p ./lib/mochiweb/ebin
@@ -38,7 +38,7 @@ init:
 
 lfe: lfe_comp.beam
 lfe_comp.beam:
-	(cd lib/lfe && $(MAKE)) 
+	(cd lib/lfe && $(MAKE))
 
 nitrogen: wf.beam
 wf.beam:
@@ -62,28 +62,28 @@ wf.lfe:
 
 ERL_LOAD='code:load_file(lfe_comp).'
 ERL_COMP='File=hd(init:get_plain_arguments()), try lfe_comp:file(File,[report,{outdir,"ebin"}]) of {ok,_Module} -> halt(0); error -> halt(1); All -> io:format("./~s:1: ~p~n",[File,All]) catch X:Y -> io:format("./~s:1: Catch outside of compiler: ~p ~p ~n",[File,X,Y]) end, halt(1).'
- 
+
 global_lithium.lfe:
 	@echo Create: include/global_lithium.lfe
 	@echo "(defun updated () '\"<I>$(shell date +"%F %R - cadar")</I>\")" > include/global_lithium.lfe
 	@echo "(defun src-path () '\"$(shell pwd)/src/pages/\")" >> include/global_lithium.lfe
 
-ebin/%.beam: src/%.lfe 
+ebin/%.beam: src/%.lfe
 	@echo Recompile: $<
-	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
+	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $<
 
-ebin/%.beam: src/pages/%.lfe 
+ebin/%.beam: src/pages/%.lfe
 	@echo Recompile: $<
-	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $< 
+	@erl -pa ./lib/lfe/ebin -noshell -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $<
 
 start: all
-	@echo Starting Lithium..  
+	@echo Starting Lithium..
 	@ERL_LIBS=`pwd`/lib erl -name lithium@localhost \
 	-pa ./ebin -pa ./lib/lfe/ebin -pa ./lib/nitrogen/ebin \
 	-s make all -eval "application:start(lithium)"
 
 clean:
-	rm -rf compile.err compile.out *.dump 
+	rm -rf compile.err compile.out *.dump
 	rm include/global_lithium.lfe
 	rm -rf ./ebin/*.beam
 
@@ -97,13 +97,13 @@ wipe: clean
 ################ Flymake ################
 
 FLY_BEAM=$(notdir $(CHK_SOURCES:.lfe=.beam))
-BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam)) 
-MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=)) 
+BEAM=$(notdir $(CHK_SOURCES:_flymake.lfe=.beam))
+MODULE=$(notdir $(CHK_SOURCES:_flymake.lfe=))
 
-#	1. Only one screen, 2. run "screen","screen -t server1","sh start.sh" 
+#	1. Only one screen, 2. run "screen","screen -t server1","sh start.sh"
 #	Install mozrepl for page reload, http://wiki.github.com/bard/mozrepl
 check-syntax:
-	erl -noshell -pa ${HOME}/elib/lfe/ebin -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES) 
+	erl -noshell -pa ${HOME}/elib/lfe/ebin -eval $(ERL_LOAD) -eval $(ERL_COMP) -extra $(CHK_SOURCES)
 #	If flymake-mode is not working, comment lines below.
 	mv ebin/$(FLY_BEAM) ebin/$(BEAM) > compile.out 2> compile.err
 	@screen -p server1 -X stuff $''code:purge($(MODULE)),code:load_file($(MODULE)).' \

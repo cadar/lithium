@@ -5,20 +5,20 @@
 (defun start (_A _B) (: nitrogen start 'lithium))
 (defun stop  (_)  (: nitrogen stop))
 
-;; route/1 lets you define new URL routes to your web pages, 
+;; route/1 lets you define new URL routes to your web pages,
 ;; or completely create a new routing scheme.
 ;; The 'Path' argument specifies the request path. Your
 ;; function should return either an atom which is the page module
 ;; to run, or a tuple containing {Module, PathInfo}. PathInfo
-;; can be accessed using wf:get_path_info(). 
+;; can be accessed using wf:get_path_info().
 ;;
-;; Uncomment the line below to direct requests 
+;; Uncomment the line below to direct requests
 ;; from "/web/newroute" to the web_index module:
 ;;
 ;; (defun route ('"/web/newroute") 'web_index);
 ;;
-;; Uncomment the line below to direct requests 
-;; from "/web/newroute" to the web_index module, 
+;; Uncomment the line below to direct requests
+;; from "/web/newroute" to the web_index module,
 ;; with trailing PathInfo included:
 ;;
 ;; (defun route (++ '"/web/newroute/" PathInfo) (tuple 'web_index 'PathInfo))
@@ -31,7 +31,7 @@
 ;; is the name of the page module.
 ;; This function should return either 'ok' if processing can proceed,
 ;; or it can return a full-fledged page by treating it just like the main function
-;; of a page. Alternatively, you can use the wf:redirect* functions to 
+;; of a page. Alternatively, you can use the wf:redirect* functions to
 ;; issue a client-side redirect to a new page.
 
 (defun request (Module) (: nitrogen request Module))
